@@ -18,7 +18,7 @@ class TopBar extends StatelessWidget {
           CircleAvatar(
             radius: 40,
             backgroundImage: NetworkImage(
-                'https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'),
+                'https://avatars.githubusercontent.com/u/81767683?s=400&u=11e05a754fea322f1c6cb3f1c436d713c19f3f3f&v=4'),
           ),
           const SizedBox(
             width: 10,
@@ -31,9 +31,9 @@ class TopBar extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white),
+                    color: Colors.black),
               ),
-              Text(title, style: TextStyle(fontSize: 16, color: Colors.white)),
+              Text(title, style: TextStyle(fontSize: 16, color: Colors.black)),
             ],
           ),
         ],
