@@ -1,18 +1,28 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
+
+import 'widgets/top_bar.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.blueAccent,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [Text('data'), Text('data')],
-                ))));
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TopBar(
+            color: Color(0xff075E55),
+            title: 'Developer(Noobie)',
+            subtitle: 'Muhammed Rashad Hameed',
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'Poster Designing',
+            style: TextStyle(fontSize: 22, color: Colors.amber),
+          )
+        ],
+      ),
+    ));
   }
 }
