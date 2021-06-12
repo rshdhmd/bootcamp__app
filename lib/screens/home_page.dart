@@ -1,8 +1,11 @@
-import 'package:bootcamp__app/photos_model.dart';
+import 'package:bootcamp__app/model/photos_model.dart';
+import 'package:bootcamp__app/screens/profile_page.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
+import 'package:bootcamp__app/env/keys.dart' as config;
+import 'package:hive/hive.dart';
 import 'widgets/top_bar.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,11 +15,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<PhotosModel> _photosData = [];
 
-  Future<void> fetchPhotos() async {
+  Future<void> _fetchPhotos() async {
     final _dioinstance = Dio();
 
     _dioinstance.options.headers['Authorization'] =
-        "Client-ID YJjcuc5QOz9RJCeu73m9Ie7YxOTKDmVztIP-5aJyTX4";
+        "Client-ID ${config.unsplash_key}";
 
     final _fetchData =
         await _dioinstance.get('https://api.unsplash.com/photos');
@@ -33,48 +36,58 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    fetchPhotos;
+    _fetchPhotos();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    fetchPhotos();
     return Scaffold(
-        body: SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TopBar(
-              color: Colors.deepOrange,
-              title: 'Developer(Noobie)',
-              subtitle: 'Muhammed Rashad Hameed',
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Poster Designing',
-              style: TextStyle(fontSize: 22, color: Colors.amber),
-            ),
-            const SizedBox(height: 10),
-            GridView.builder(
-                padding: EdgeInsets.all(10),
-                itemCount: _photosData.length,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 2),
-                itemBuilder: (ctx, index) => Container(
-                      child: Image.network(
-                        _photosData[index].imgURL,
-                        fit: BoxFit.cover,
-                      ),
-                    ))
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ValueListenableBuilder(
+                valueListenable: Hive.box('profile').listenable(),
+                builder: (BuildContext context, Box value, Widget? child) =>
+                    TopBar(
+                  color: Colors.deepOrange,
+                  title: 'Developer(Noobie)',
+                  subtitle: value.get('name'),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Poster Designing',
+                style: TextStyle(fontSize: 22, color: Colors.amber),
+              ),
+              const SizedBox(height: 10),
+              GridView.builder(
+                  padding: EdgeInsets.all(10),
+                  itemCount: _photosData.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 2),
+                  itemBuilder: (ctx, index) => Container(
+                        child: Image.network(
+                          _photosData[index].imgURL,
+                          fit: BoxFit.cover,
+                        ),
+                      ))
+            ],
+          ),
         ),
       ),
-    ));
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).pushNamed(ProfileScreen.routeName);
+        },
+        child: Icon(Icons.edit),
+      ),
+    );
   }
 }
