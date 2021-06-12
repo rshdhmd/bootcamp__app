@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bootcamp__app/env/hiveinit.dart';
 import 'package:bootcamp__app/screens/home_page.dart';
 import 'package:bootcamp__app/screens/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +10,7 @@ import 'screens/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Directory appDocDir = await getApplicationDocumentsDirectory();
-  String appDocPath = appDocDir.path;
-  Hive.init(appDocPath);
-  var boxs = await Hive.openBox('profile');
-
-  var box = Hive.box('profile');
-  box.put('name', 'Muhammed Rashad Hameed');
-  var name = box.get('name');
-
-  print('Name: $name');
+  await hiveInit();
 
   runApp(MyApp());
 }
