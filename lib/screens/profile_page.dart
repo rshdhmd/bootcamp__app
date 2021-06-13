@@ -1,6 +1,5 @@
 import 'package:bootcamp__app/core/database/userDB.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/ProfileScreen';

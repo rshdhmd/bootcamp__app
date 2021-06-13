@@ -1,11 +1,7 @@
-import 'dart:io';
-
 import 'package:bootcamp__app/env/hiveinit.dart';
 import 'package:bootcamp__app/screens/home_page.dart';
 import 'package:bootcamp__app/screens/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
 import 'screens/home_page.dart';
 
 void main() async {
