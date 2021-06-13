@@ -1,9 +1,7 @@
 import 'package:bootcamp__app/core/controller/api.dart';
 import 'package:bootcamp__app/model/photos_model.dart';
 import 'package:bootcamp__app/screens/widgets/photo_tile.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:bootcamp__app/env/keys.dart' as config;
 
 class PhotoGrid extends StatefulWidget {
   @override
@@ -15,10 +13,13 @@ class _PhotoGridState extends State<PhotoGrid> {
 
   Future<void> _fetchPhotos() async {
     PhotosAPI _photosAPI = PhotosAPI();
+
     List<PhotosModel> _tempPhotosData =
         await _photosAPI.fetchPhotos().catchError((err) => print(err));
 
     setState(() => _photosData = _tempPhotosData);
+
+    print("object");
   }
 
   @override

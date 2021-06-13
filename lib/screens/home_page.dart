@@ -1,7 +1,5 @@
-import 'package:bootcamp__app/model/photos_model.dart';
 import 'package:bootcamp__app/screens/profile_page.dart';
 import 'package:bootcamp__app/screens/widgets/photo_grid.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive/hive.dart';
