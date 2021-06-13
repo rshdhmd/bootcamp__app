@@ -12,7 +12,7 @@ class PhotosAPI {
       final _dioinstance = Dio(options);
 
       _dioinstance.options.headers['Authorization'] =
-          "Client-ID ${config.unsplash_key}";
+          "Client-ID ${config.unsplashKey}";
 
       final _fetchData =
           await _dioinstance.get('https://api.unsplash.com/photos');
